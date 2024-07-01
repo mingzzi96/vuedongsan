@@ -1,6 +1,6 @@
 <template>
   <div class="menu">
-    <a>Home</a>
+    <a v-for="(menu, i) in menus" :key="menu[i]">{{menu}}</a>
   </div>
 
   <img alt="Vue logo" src="./assets/logo.png">
@@ -22,6 +22,7 @@ export default {
   name: 'App',
   data(){
     return {
+      menus: ['Home', 'Product', 'Mypage'],
       products : [{name:'역삼동원룸', price: 46, count: 0}, {name:'천호동원룸', price:50, count: 0}, {name:'마포구원룸', price: 60, count: 0}],
     }
   },
