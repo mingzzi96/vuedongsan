@@ -13,9 +13,11 @@
 
   <img alt="Vue logo" src="./assets/logo.png">
   <ul>
-    <li v-for="(product, i) in products" :key="product.name+i" :id="product.name+i">
-      <h4 @click="isOpen = true">{{product.name}}</h4>
-      <p>{{product.price}}만원</p>
+    <li v-for="(product, i) in products" :key="product.id" :id="product.title+product.id">
+      <img :src="product.image" :alt="product.title + '이미지'" srcset="">
+      <h4 @click="isOpen = true">{{product.title}}</h4>
+      <p>{{product.price}}원</p>
+      <span>{{product.content}}</span>
       <div>
         <button @click="increase(i)">허위매물 신고</button>
         <span>신고수: {{product.count}}</span>
@@ -26,13 +28,15 @@
 
 <script>
 
+import onerooms from './assets/oneroom.js';
+
 export default {
   name: 'App',
   data(){
     return {
       isOpen: false,
       menus: ['Home', 'Product', 'MyPage'],
-      products : [{name:'역삼동원룸', price: 46, count: 0}, {name:'천호동원룸', price:50, count: 0}, {name:'마포구원룸', price: 60, count: 0}],
+      products : onerooms
     }
   },
   components: {
