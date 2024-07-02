@@ -41,7 +41,11 @@ export default {
       sortedProducts: oneRooms
     }
   },
+  created(){
+    // 서버에서 데이터 가져올 때 주로 사용, 컴포넌트 생성되기 전에 가져오도록 함
+  },
   mounted(){
+    // 컴포넌트 생성되고 해제될 때 사용
     setTimeout(() => {
       this.showDiscount = false
     }, 5000);
