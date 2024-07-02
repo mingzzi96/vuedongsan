@@ -9,14 +9,13 @@
     </div>
   </transition>
 
-
-  <img alt="Vue logo" src="./assets/logo.png">
-
   <div class="sorting-flex-group">
     <button @click="priceUp">가격 낮은순 정렬</button>
     <button @click="priceDown">가격 높은순 정렬</button>
     <button @click="sortReset">되돌리기</button>
   </div>
+
+  <Discount v-if="showDiscount"/>
 
   <ul>
     <Card v-for="(product) in sortedProducts" :key="product.id" :product="product" @openModal="openModal($event)" />
@@ -25,6 +24,7 @@
 
 <script>
 
+import Discount from './components/discount.vue'
 import oneRooms from './assets/oneroom.js';
 import Modal from './components/modal.vue'
 import Card from './components/card.vue'
@@ -33,6 +33,7 @@ export default {
   name: 'App',
   data(){
     return {
+      showDiscount: true,
       clickedIndex:0,
       isOpen: false,
       menus: ['Home', 'Product', 'MyPage'],
@@ -40,9 +41,15 @@ export default {
       sortedProducts: oneRooms
     }
   },
+  mounted(){
+    setTimeout(() => {
+      this.showDiscount = false
+    }, 5000);
+  },
   components: {
     Modal,
-    Card
+    Card,
+    Discount
   },
   methods: {
     increase(index){
@@ -65,7 +72,7 @@ export default {
     sortReset() {
       this.sortedProducts = [...this.initialProducts];
     }
-  }
+  },
 }
 </script>
 

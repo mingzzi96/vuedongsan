@@ -3,7 +3,6 @@
       <h4>{{products[clickedIndex].title}}</h4>
       <p>{{products[clickedIndex].content}}</p>
       <p>{{products[clickedIndex].price}}원</p>
-      <Discount/>
       <input v-model.number="month" />
       <br>
       <p>{{month}}개월 선택함 : {{products[clickedIndex].price * month}}</p>
