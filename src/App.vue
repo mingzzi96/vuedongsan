@@ -12,7 +12,10 @@
 
   <img alt="Vue logo" src="./assets/logo.png">
 
-  <button @click="priceSort">가격 순 정렬</button>
+  <div class="sorting-flex-group">
+    <button @click="priceUp">가격 낮은순 정렬</button>
+    <button @click="priceDown">가격 높은순 정렬</button>
+  </div>
 
   <ul>
     <Card v-for="(product) in products" :key="product.id" :product="product" @openModal="openModal($event)" />
@@ -51,8 +54,11 @@ export default {
       this.isOpen = false;
       this.clickedIndex = 0;
     },
-    priceSort() {
+    priceUp() {
       this.products.sort((a,b) => a.price - b.price);
+    },
+    priceDown() {
+      this.products.sort((a,b) => b.price - a.price);
     }
   }
 }
@@ -97,5 +103,13 @@ div {
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+}
+
+.sorting-flex-group {
+  width: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  gap: 12px;
 }
 </style>
