@@ -7,6 +7,7 @@
     <div class="white-bg">
       <h4>{{products[clickedProductIndex].title}}</h4>
       <p>{{products[clickedProductIndex].content}}</p>
+      <p>{{products[clickedProductIndex].price}}원</p>
       <button @click="closeModal">닫기</button>
     </div>
   </div>
