@@ -3,7 +3,7 @@
     <a v-for="(menu, i) in menus" :key="menu[i]">{{menu}}</a>
   </div>
 
-  <div class="black-bg" v-if="isOpen === true">
+  <div class="black-bg" :class="{end: isOpen}">
     <Modal :products="products" :clickedIndex="clickedIndex" @closeModal="closeModal" />
   </div>
 
@@ -76,8 +76,16 @@ div {
   box-sizing: border-box;
 }
 .black-bg {
-width: 100%; height:100%;
-background: rgba(0,0,0,0.5);
-position: fixed; padding: 20px;
+  width: 100vw; height:100vh;
+  background: rgba(0,0,0,0.5);
+  position: fixed; 
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s;
+}
+.end {
+  pointer-events: all;
+  opacity: 1;
 }
 </style>
