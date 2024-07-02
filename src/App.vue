@@ -84,7 +84,7 @@ export default {
       if(this.discountNumber === 0){
         return false
       }
-      this.discountNumber -= 1;
+      this.discountNumber--;
     }
   },
 }
