@@ -12,6 +12,8 @@
 
   <img alt="Vue logo" src="./assets/logo.png">
 
+  <button @click="priceSort">가격 순 정렬</button>
+
   <ul>
     <Card v-for="(product) in products" :key="product.id" :product="product" @openModal="openModal($event)" />
   </ul>
@@ -48,6 +50,9 @@ export default {
     closeModal() {
       this.isOpen = false;
       this.clickedIndex = 0;
+    },
+    priceSort() {
+      this.products.sort((a,b) => a.price - b.price);
     }
   }
 }
