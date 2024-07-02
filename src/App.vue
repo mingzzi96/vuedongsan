@@ -15,7 +15,7 @@
     <button @click="sortReset">되돌리기</button>
   </div>
 
-  <Discount v-if="showDiscount"/>
+  <Discount v-if="showDiscount" :discountNumber="discountNumber"/>
 
   <ul>
     <Card v-for="(product) in sortedProducts" :key="product.id" :product="product" @openModal="openModal($event)" />
@@ -34,6 +34,7 @@ export default {
   data(){
     return {
       showDiscount: true,
+      discountNumber: 10,
       clickedIndex:0,
       isOpen: false,
       menus: ['Home', 'Product', 'MyPage'],
@@ -46,9 +47,12 @@ export default {
   },
   mounted(){
     // 컴포넌트 생성되고 해제될 때 사용
-    setTimeout(() => {
-      this.showDiscount = false
-    }, 5000);
+    // setTimeout(() => {
+    //   this.showDiscount = false
+    // }, 5000);
+    setInterval(() => {
+      this.decreasePercentage()
+    }, 1000);
   },
   components: {
     Modal,
@@ -75,6 +79,12 @@ export default {
     },
     sortReset() {
       this.sortedProducts = [...this.initialProducts];
+    },
+    decreasePercentage() {
+      if(this.discountNumber === 0){
+        return false
+      }
+      this.discountNumber -= 1;
     }
   },
 }
