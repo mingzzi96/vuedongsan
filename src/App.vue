@@ -5,9 +5,9 @@
 
   <div class="black-bg" v-if="isOpen === true">
     <div class="white-bg">
-      <h4>상세페이지</h4>
-      <p>상세페이지내용임</p>
-      <button @click="isOpen = false">닫기</button>
+      <h4>{{products[clickedProductIndex].title}}</h4>
+      <p>{{products[clickedProductIndex].content}}</p>
+      <button @click="closeModal">닫기</button>
     </div>
   </div>
 
@@ -15,7 +15,7 @@
   <ul>
     <li v-for="(product, i) in products" :key="product.id" :id="product.title+product.id">
       <img :src="product.image" :alt="product.title + '이미지'" srcset="">
-      <h4 @click="isOpen = true">{{product.title}}</h4>
+      <h4 @click="openModal(i)">{{product.title}}</h4>
       <p>{{product.price}}원</p>
       <span>{{product.content}}</span>
       <div>
@@ -28,15 +28,16 @@
 
 <script>
 
-import onerooms from './assets/oneroom.js';
+import oneRooms from './assets/oneroom.js';
 
 export default {
   name: 'App',
   data(){
     return {
+      clickedProductIndex:0,
       isOpen: false,
       menus: ['Home', 'Product', 'MyPage'],
-      products : onerooms
+      products : oneRooms
     }
   },
   components: {
@@ -44,6 +45,14 @@ export default {
   methods: {
     increase(index){
       this.products[index].count += 1
+    },
+    openModal(index) {
+      this.isOpen = true;
+      this.clickedProductIndex = index;
+    },
+    closeModal() {
+      this.isOpen = false;
+      this.clickedProductIndex = 0;
     }
   }
 }
