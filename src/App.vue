@@ -83,7 +83,7 @@ div {
   position: fixed; 
   padding: 20px;
 }
-/* 이 클래스들이 무엇을 하는지 다음에 설명하겠습니다. */
+
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.5s ease;
