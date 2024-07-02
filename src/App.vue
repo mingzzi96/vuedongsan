@@ -3,9 +3,11 @@
     <a v-for="(menu, i) in menus" :key="menu[i]">{{menu}}</a>
   </div>
 
-  <div class="black-bg" :class="{end: isOpen}">
-    <Modal :products="products" :clickedIndex="clickedIndex" @closeModal="closeModal" />
-  </div>
+  <transition>
+    <div class="black-bg" v-if="isOpen">
+      <Modal :products="products" :clickedIndex="clickedIndex" @closeModal="closeModal" />
+    </div>
+  </transition>
 
 
   <img alt="Vue logo" src="./assets/logo.png">
@@ -80,12 +82,15 @@ div {
   background: rgba(0,0,0,0.5);
   position: fixed; 
   padding: 20px;
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.2s;
 }
-.end {
-  pointer-events: all;
-  opacity: 1;
+/* 이 클래스들이 무엇을 하는지 다음에 설명하겠습니다. */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
