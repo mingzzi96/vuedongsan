@@ -5,7 +5,7 @@
 
   <transition>
     <div class="black-bg" v-if="isOpen">
-      <Modal :products="products" :clickedIndex="clickedIndex" @closeModal="closeModal" />
+      <Modal :products="sortedProducts" :clickedIndex="clickedIndex" @closeModal="closeModal" />
     </div>
   </transition>
 
@@ -15,10 +15,11 @@
   <div class="sorting-flex-group">
     <button @click="priceUp">가격 낮은순 정렬</button>
     <button @click="priceDown">가격 높은순 정렬</button>
+    <button @click="sortReset">되돌리기</button>
   </div>
 
   <ul>
-    <Card v-for="(product) in products" :key="product.id" :product="product" @openModal="openModal($event)" />
+    <Card v-for="(product) in sortedProducts" :key="product.id" :product="product" @openModal="openModal($event)" />
   </ul>
 </template>
 
@@ -35,7 +36,8 @@ export default {
       clickedIndex:0,
       isOpen: false,
       menus: ['Home', 'Product', 'MyPage'],
-      products : oneRooms
+      initialProducts : [...oneRooms],
+      sortedProducts: oneRooms
     }
   },
   components: {
@@ -55,10 +57,13 @@ export default {
       this.clickedIndex = 0;
     },
     priceUp() {
-      this.products.sort((a,b) => a.price - b.price);
+      this.sortedProducts.sort((a,b) => a.price - b.price);
     },
     priceDown() {
-      this.products.sort((a,b) => b.price - a.price);
+      this.sortedProducts.sort((a,b) => b.price - a.price);
+    },
+    sortReset() {
+      this.sortedProducts = [...this.initialProducts];
     }
   }
 }
