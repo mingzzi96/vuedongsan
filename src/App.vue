@@ -11,7 +11,7 @@
   <img alt="Vue logo" src="./assets/logo.png">
 
   <ul>
-    <Card v-for="(product, i) in products" :key="product.id" :product="product" @openModal="openModal(i)" />
+    <Card v-for="(product) in products" :key="product.id" :product="product" @openModal="openModal($event)" />
   </ul>
 </template>
 
@@ -39,9 +39,9 @@ export default {
     increase(index){
       this.products[index].count += 1
     },
-    openModal(index) {
+    openModal(e) {
       this.isOpen = true;
-      this.clickedIndex = index;
+      this.clickedIndex = e;
     },
     closeModal() {
       this.isOpen = false;

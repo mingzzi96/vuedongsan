@@ -1,7 +1,7 @@
 <template>
     <li>
       <img :src="product.image" :alt="product.title + '이미지'" srcset="">
-      <h4 @click="$emit('openModal')">{{product.title}}</h4>
+      <h4 @click="$emit('openModal', product.id)">{{product.title}}</h4>
       <p>{{product.price}}원</p>
       <span>{{product.content}}</span>
     </li>
