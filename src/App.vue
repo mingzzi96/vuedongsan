@@ -4,44 +4,36 @@
   </div>
 
   <div class="black-bg" v-if="isOpen === true">
-    <div class="white-bg">
-      <h4>{{products[clickedProductIndex].title}}</h4>
-      <p>{{products[clickedProductIndex].content}}</p>
-      <p>{{products[clickedProductIndex].price}}원</p>
-      <button @click="closeModal">닫기</button>
-    </div>
+    <Modal :products="products" :clickedIndex="clickedIndex" @closeModal="closeModal" />
   </div>
 
+
   <img alt="Vue logo" src="./assets/logo.png">
+
   <ul>
-    <li v-for="(product, i) in products" :key="product.id" :id="product.title+product.id">
-      <img :src="product.image" :alt="product.title + '이미지'" srcset="">
-      <h4 @click="openModal(i)">{{product.title}}</h4>
-      <p>{{product.price}}원</p>
-      <span>{{product.content}}</span>
-      <div>
-        <button @click="increase(i)">허위매물 신고</button>
-        <span>신고수: {{product.count}}</span>
-      </div>
-    </li>
+    <Card v-for="(product, i) in products" :key="product.id" :product="product" @openModal="openModal(i)" />
   </ul>
 </template>
 
 <script>
 
 import oneRooms from './assets/oneroom.js';
+import Modal from './components/modal.vue'
+import Card from './components/card.vue'
 
 export default {
   name: 'App',
   data(){
     return {
-      clickedProductIndex:0,
+      clickedIndex:0,
       isOpen: false,
       menus: ['Home', 'Product', 'MyPage'],
       products : oneRooms
     }
   },
   components: {
+    Modal,
+    Card
   },
   methods: {
     increase(index){
@@ -49,11 +41,11 @@ export default {
     },
     openModal(index) {
       this.isOpen = true;
-      this.clickedProductIndex = index;
+      this.clickedIndex = index;
     },
     closeModal() {
       this.isOpen = false;
-      this.clickedProductIndex = 0;
+      this.clickedIndex = 0;
     }
   }
 }
@@ -84,13 +76,8 @@ div {
   box-sizing: border-box;
 }
 .black-bg {
-  width: 100%; height:100%;
-  background: rgba(0,0,0,0.5);
-  position: fixed; padding: 20px;
+width: 100%; height:100%;
+background: rgba(0,0,0,0.5);
+position: fixed; padding: 20px;
 }
-.white-bg {
-  width: 100%; background: white;
-  border-radius: 8px;
-  padding: 20px;
-} 
 </style>
