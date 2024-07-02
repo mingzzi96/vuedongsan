@@ -4,6 +4,11 @@
       <p>{{products[clickedIndex].content}}</p>
       <p>{{products[clickedIndex].price}}원</p>
       <Discount/>
+      <input v-model="month" />
+      <br>
+      <p>{{month}}개월 선택함 : {{products[clickedIndex].price * month}}</p>
+      <br>
+      <br>
       <button @click="$emit('closeModal')">닫기</button>
     </div>
 </template>
@@ -11,6 +16,11 @@
 <script>
 export default {
   name: 'DefaultModal',
+  data(){
+    return {
+        month: 0,
+    }
+  },
   props: {
     products: Array,
     clickedIndex: Number,
